@@ -12,14 +12,11 @@ else
     exit 1
 fi
 
-# Create shared directory and set permissions
 sudo mkdir -p /mnt/shared_nfs
 sudo chmod 777 /mnt/shared_nfs
 
-# Configure NFS exports
 echo "/mnt/shared_nfs 192.168.1.0/24(rw,sync,no_subtree_check,no_root_squash)" | sudo tee -a /etc/exports
 
-# Export shared directories
 sudo exportfs -arv
 
 # Start and enable NFS server on boot
@@ -42,11 +39,6 @@ fi
 # Verify NFS exports
 sudo exportfs -v
 
-# Client side installation and mount (uncomment and edit server-ip as needed)
-# sudo apt install -y nfs-common
-# sudo yum install -y nfs-utils
-# sudo mount server-ip:/mnt/shared_nfs /mnt
-# df -h
 
 echo "NFS server setup is complete. Please uncomment and edit the client-side commands as needed."
 
